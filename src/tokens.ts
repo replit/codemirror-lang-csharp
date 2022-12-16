@@ -12,9 +12,7 @@ const
 	quote = 34,
 	backslash = 92,
 	braceL = 123,
-	braceR = 125,
-	dollar = 36,
-	apostrophe = 39;
+	braceR = 125;
 
 export const interpString = new ExternalTokenizer((input) => {
 	for(let i = 0; ; i++) {

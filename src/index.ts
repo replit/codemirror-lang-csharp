@@ -1,4 +1,4 @@
-import { parser as myLanguageParser } from "./syntax.grammar";
+import { parser as csharpParser } from "./syntax.grammar";
 import {
 	LRLanguage,
 	LanguageSupport,
@@ -16,32 +16,16 @@ import {
 	Completion,
 } from "@codemirror/autocomplete";
 
-export const parser = myLanguageParser;
+export const parser = csharpParser;
 
-export const myLanguageLanguage = LRLanguage.define({
+export const csharpLanguage = LRLanguage.define({
 	parser: parser.configure({
 		props: [
 			indentNodeProp.add({
-				Parenthesized: delimitedIndent({ closing: ")" }),
-				Table: delimitedIndent({ closing: "}" })
-				/*
-AttrSet: delimitedIndent({ closing: "}" }),
-List: delimitedIndent({ closing: "]" }),
-Let: continuedIndent({ except: /^\s*in\b/ }),
-				*/
+				Delim: continuedIndent({ except: /^\s*(?:case\b|default:)/ })
 			}),
 			foldNodeProp.add({
-				// fold information cango here
-				/*
-AttrSet: foldInside,
-List: foldInside,
-Let(node) {
-	let first = node.getChild("let"),
-	last = node.getChild("in");
-	if (!first || !last) return null;
-	return { from: first.to, to: last.from };
-},
-				*/
+				Delim: foldInside
 			}),
 			styleTags({
 				"Keyword ContextualKeyword SimpleType": t.keyword,
@@ -64,19 +48,27 @@ Let(node) {
 				ParamName: [t.emphasis, t.variableName],
 				VarName: t.variableName,
 				"FieldName PropertyName": t.propertyName,
+
+				"( )": t.paren,
+				"{ }": t.brace,
+				"[ ]": t.squareBracket,
 			}),
 		],
 	}),
 	languageData: {
 		commentTokens: { line: "//", block: { open: "/*", close: "*/" } },
 		closeBrackets: { brackets: ["(", "[", "{", '"', "'"] },
-		indentOnInput: /^\s*(\)|\]\]?|\}|else|else\s+if|catch|finally)$/,
+		indentOnInput: /^\s*((\)|\]|\})$|(else|else\s+if|catch|finally|case)\b|default:)/,
 	},
 });
 
-export function myLanguage() {
+export function csharp() {
 	return new LanguageSupport(
-		myLanguageLanguage,
-		// optionally add completions/snippets or other features
+		csharpLanguage,
+		csharpLanguage.data.of({
+			autocomplete: ifNotIn(
+				["LineComment", "BlockComment"]
+			),
+		})
 	);
 }

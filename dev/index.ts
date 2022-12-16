@@ -1,7 +1,7 @@
 import { EditorState } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
 import { basicSetup } from 'codemirror';
-import { myLanguage, parser } from "../dist/";
+import { csharp, parser } from "../dist/";
 import { printTree } from "./print-lezer-tree";
 import { oneDark } from '@codemirror/theme-one-dark';
 
@@ -232,7 +232,7 @@ A.B c = 1;
 new EditorView({
   state: EditorState.create({
     doc,
-    extensions: [basicSetup, myLanguage(), oneDark, EditorView.lineWrapping],
+    extensions: [basicSetup, csharp(), oneDark, EditorView.lineWrapping],
   }),
   parent: document.querySelector('#editor'),
 });
