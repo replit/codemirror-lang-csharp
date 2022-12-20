@@ -1,10 +1,10 @@
 {
-  "name": "codemirror-lang-mylanguage",
-  "description": "A MyLanguage mode for CodeMirror 6",
+  "name": "@replit/codemirror-lang-csharp",
+  "description": "A C# mode for CodeMirror 6",
   "version": "6.0.0",
   "author": {
-    "name": "Your name",
-    "email": "you@email.com"
+    "name": "Alan Forshaw",
+    "email": "alan@repl.it"
   },
   "type": "module",
   "main": "dist/index.cjs",
@@ -47,5 +47,9 @@
     "codemirror": "^6.0.0",
     "npm-run-all": "^4.1.5",
     "vite": "^2.3.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/replit/codemirror-lang-csharp.git"
   }
 }
