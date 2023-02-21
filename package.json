@@ -1,7 +1,7 @@
 {
   "name": "@replit/codemirror-lang-csharp",
   "description": "A C# mode for CodeMirror 6",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "author": {
     "name": "Alan Forshaw",
     "email": "alan@repl.it"
