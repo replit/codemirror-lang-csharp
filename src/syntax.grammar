@@ -1703,7 +1703,7 @@ fixedSizeBufferDeclarator { identifier delim<'[' expr ']'> }
 
 /*globalAttrs { globalAttrSection+ }
 
-globalAttrSection {https://replit.com/join/eutvsrecsr-theangryepicbanana
+globalAttrSection {
 	'[' globalAttrTargetSpecifier csep1<attr> ','? ']'
 }
 
